@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+		var saldo = 10000.00; //Float
+		var nome= prompt('Olá qual é o seu nome?')
+		alert(`Olá ${nome}. É um prazer ter você aqui.`)
+		function verificar_senha(){
+			var senha= parseInt(prompt('Digite sua senha'));
+			if(senha != 3589){
+					alert('Senha errada')
+					return verificar_senha();
+				} else{
+					return true
+				}
+		}
+		function inicio() {
+            
+			var escolha = parseInt(prompt('Selecione uma opção: Saldo 1, Extrato 2, Saque 3, Depósito 4, Transferência 5, Sair 6'));
+            switch(escolha){
+				case 1:
+				   if(verificar_senha()){ 
+				   ver_saldo();}
+               	   break;
+				case 2: 
+					if(verificar_senha()){ 
+					extrato();}
+					break;
+				case 3: 
+					if(verificar_senha()){ 
+					fazer_saque();}
+					break;
+				case 4:
+					fazer_deposito();
+					break;
+				case 5: 
+					if(verificar_senha()){
+					transferencia();}
+					break;
+				case 6: 
+					sair();
+					alert('')
+					break;
+				default: 
+					erro();
+			}  
+			
+		}		
+
+		function ver_saldo() {
+			alert('Seu saldo atualizado é: ' + saldo);
+			inicio();
+		}
+
+		function fazer_deposito() {
+			var deposito = parseFloat(prompt('Qual o valor para depósito?'));
+			// Not a Number -> Isso é um não-número?
+			if (isNaN(deposito) || deposito === '') {
+				alert('Por favor, informe um número!');
+				fazer_deposito();
+			} 
+			if(deposito<=0){
+				alert('Operação não autorizada');
+				fazer_deposito();
+			}
+			
+			else {
+				saldo += deposito;
+                //saldo += deposito; 
+
+				ver_saldo();
+			}
+		}
+
+		function fazer_saque() {
+			var saque = parseFloat(prompt('Qual o valor para saque?'));
+			if (isNaN(saque) || saque === ''){
+				alert('Por favor, informe um número:');
+				fazer_saque();
+			}
+	 
+			if(saque>saldo){
+				alert(`Operação não autorizada`)
+				fazer_saque()
+			}
+			if(saque<=0){
+				alert('Operação não autorizada.');
+				fazer_saque();
+                
+			}
+			if(saque<saldo){ 
+				saldo -= saque;
+
+			}
+				
+		
+	
+			ver_saldo();
+			
+			
+				
+		}
+
+		function transferencia() {
+			var transferencia= parseFloat(prompt('Qual o valor da tranferênica?'));
+			if(isNaN(transferencia)){ 
+			   alert('Por favor, informe um número')
+			   transferencia();
+			}
+			if(transferencia>saldo){
+				alert('Operação não autorizada')
+				transferencia();
+			}
+			if(transferencia<= 0){
+				alert('Operação não autorizada')
+				transferencia();
+			}
+			if(transferencia<saldo){
+				saldo -= transferencia
+			}
+
+			ver_saldo();
+		}
+
+		function erro() {
+			alert('Por favor, informe um número entre 1 e 6');
+			inicio();
+		}
+
+		function sair() {
+			var confirma = confirm('Você deseja sair?');
+			if (confirma) {
+				alert(`${nome}, foi um prazer ter você por aqui!`)
+				window.close();
+			} else {
+                
+				inicio();
+			}
+
+			
+		}
+
+		function extrato (){
+			alert('Mercadinho do seu Zé R$100,00  \n Depósito R$ 20,00  \n Cabeleileila Leila R$150,00');
+			inicio();
+		}
+
+		inicio();
+    </script>
+</body>
+</html>
